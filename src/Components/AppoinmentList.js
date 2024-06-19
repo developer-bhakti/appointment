@@ -38,55 +38,63 @@ const AppoinmentList = ({
           </tr>
         </thead>
         <tbody>
-          {appointments.map((appointment, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
+            {appoinments.map((appoinment,index) =>(
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>
+                  {editedIndex === index ? (
+                    <input type="text" value={editedName}onChange={(e) =>
+                      setEditedName(e.target.value)
+                    }
+                    />
+                  ) : (
+                    appoinment.name
+                  )}
+                </td>
 
-              <td>
+                <td>
                 {editedIndex === index ? (
-                  <input
-                    type="text"
-                    value={editedName}
-                    onChange={(e) => setEditedName(e.target.value)}
-                  />
+                    <input type="date" value={editedDate}onChange={(e) =>
+                      setEditedDate(e.target.value)
+                    }
+                    />
+                  ) : (
+                    appoinment.date
+                  )}
+                </td>
+
+                <td>
+                {editedIndex === index ? (
+                   <>
+                   <button onClick={()=> handleSaveEdit(index)                
+                   }
+                   >
+                    save
+                   </button>
+                   <button onClick={handleCancelEdit}>Cancel</button>
+                   </>
                 ) : (
-                  appointment.name
-                )}
-              </td>
 
-              <td>
-                {editedIndex === index ? (
-                  <input
-                    type="date"
-                    value={editedDate}
-                    onChange={(e) => setEditedDate(e.target.value)}
-                  />
-                ) : (
-                  appointment.date
-                )}
-              </td>
-
-              <td>
-                {editedIndex === index ? (
                   <>
-                    <button onClick={() => handleSaveEdit(index)}>Save</button>
-
-                    <button onClick={handleCancelEdit}>Cancel</button>
-                  </>
-                ) : (
-                  <>
-                    <button onClick={() => handleEdit(index)}>Edit</button>
-
-                    <button onClick={() => deleteAppointment(index)}>
-                      Delete
-                    </button>
+                     <button onClick={()=> handleEdit(index)}
+                   >
+                    Edit
+                   </button>
+                   <button onClick={()=>
+                   deletAppoinment(index)
+                   }
+                   > 
+                   Delete                   
+                   </button>
                   </>
                 )}
-              </td>
-            </tr>
-          ))}
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
+
+      <button onClick={clearAppoinment}>Clear All Appoinment</button>
     </div>
   );
 };
