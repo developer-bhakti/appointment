@@ -1,45 +1,43 @@
 import React, { useState } from "react";
 import "./App.css";
-import AppointmentForm from "./Components/AppointmentForm";
-import AppointmentList from "./Components/AppointmentList";
- const App = () => {
- const [appointments, setAppointments] = useState([]);
- const addAppointment = (appointment) => {
-        setAppointments([...appointments, appointment]);
- };
+import AppointmentList from "./Components/AppoinmentList";
+import AppointmentForm from "./Components/AppoinmentForm";
+const App = () => {
+  const [appoinments, setAppoinments] = useState([]);
 
-        const deleteAppointment = (index) => {
-        const deletedAppointments = [...appointments];
-        deletedAppointments.splice(index, 1);
-        setAppointments(deletedAppointments);
-    };
- 
-    const editAppointment = (index, editedName, editedDate) => {
-    const updatedAppointments = [...appointments];
-    updatedAppointments[index] = {
-    name: editedName,
-    date: editedDate,
+  const addAppoinment = (appointment) => {
+    setAppoinments([...appoinments, appointment]);
   };
 
-      setAppointments(updatedAppointments);
-    };
+  const deletAppoinment = (index) => {
+    const newAppoinments = [...appoinments];
+    newAppoinments.splice(index, 1);
+    setAppoinments(newAppoinments);
+  };
 
-    const clearAppointments = () => {
-    setAppointments([]);
-    };
- 
-    return (
-        <div>
-            <h1>Appointment Management System</h1>
-            <AppointmentForm addAppointment={addAppointment} />
-            <AppointmentList
-                appointments={appointments}
-                deleteAppointment={deleteAppointment}
-                clearAppointments={clearAppointments}
-                editAppointment={editAppointment}
+  const editAppoinment = (index, name, date) => {
+    const newAppoinments = [...appoinments];
+    newAppoinments[index] = { name, date };
+    setAppoinments(newAppoinments);
+  };
+
+  const clearAppoinment = () => {
+    setAppoinments([]);
+  };
+
+  return (
+    <div>
+      <h1>Appointment Management System</h1>
+      <AppointmentForm addAppoinment={addAppoinment} />
+
+      <AppointmentList
+                appoinments={appoinments}
+                deletAppoinment={deletAppoinment}
+                clearAppoinment={clearAppoinment}
+                editAppoinment={editAppoinment}
             />
-        </div>
-    );
+    </div>
+  );
 };
 
 export default App;
